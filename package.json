@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "moment": "^2.20.1",
+    "moment-timezone": "^0.5.14",
     "nodemailer": "^4.4.1",
     "restify": "^4.3.0"
   },

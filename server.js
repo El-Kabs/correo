@@ -6,6 +6,8 @@ var nodemailer = require('nodemailer');
 
 var moment = require('moment');
 
+var momenttz = require('moment-timezone');
+
 var port = process.env.PORT || 3000;
 
 server.use(restify.bodyParser({ mapParams: true }));
@@ -35,7 +37,7 @@ server.post('correo', (req, res, next) =>
 	  from: 'kabska1999@gmail.com',
 	  to: data.destinatario,
 	  subject: data.asunto,
-	  text: data.texto + ' ' + tiempoF
+	  text: data.texto + ' ' + tiempoF + ' ' + momenttz.tz.guess()
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
