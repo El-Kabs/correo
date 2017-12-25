@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <meta charset="UTF-8">
+  <title>Hola Firebase</title>
+  <script>
+    var ref = new Firebase("https://email-nodejs-37672.firebaseio.com/");
+    ref.child("appName").on("value", function(snapshot){
+      console.log(snapshot.val());
+      document.getElementById("titular").textContent = snapshot.val();
+    });
+  </script>
+</head>
+<body>
+  <h1 id="titular"></h1>
+</body>
+</html>
