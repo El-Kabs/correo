@@ -4,6 +4,8 @@
   "description": "IBM",
   "main": "index.js",
   "dependencies": {
+    "moment": "^2.20.1",
+    "nodemailer": "^4.4.1",
     "restify": "^4.3.0"
   },
   "scripts": {
