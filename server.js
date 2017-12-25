@@ -6,6 +6,8 @@ var nodemailer = require('nodemailer');
 
 var moment = require('moment');
 
+var port = process.env.PORT || 3000;
+
 server.use(restify.bodyParser({ mapParams: true }));
 
 server.get('email', (req,res,next) =>  
@@ -48,6 +50,6 @@ server.post('correo', (req, res, next) =>
 	next();
 });
 
-server.listen(8080, function() {  
+server.listen(port, function() {  
     console.log('%s listening at %s', server.name, server.url);
 });
