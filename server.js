@@ -23,8 +23,16 @@ server.get('email', (req,res,next) =>
 server.post('correo', (req, res, next) =>
 {
 	let data = req.body || {}
-	var tiempo = new Date();
-	var tiempoF = moment(tiempo, 'DD/MM/YYYY', true).format('MMMM Do YYYY, h:mm:ss a');
+	var tiempo = moment();
+	var tiempoF = tiempo.toISOString();
+	var tiempoFF = momenttz.tz(tiempoF, momenttz.tz.guess());
+	var losAngeles = tiempoFF.clone().tz("America/Los_Angeles").format();
+	var losAngelesF = moment.parseZone(losAngeles);
+	var losAngelesFF = moment(losAngelesF).format("MMMM Do YYYY, h:mm:ss a");
+	console.log("Hora aca: "+ tiempo)
+	console.log("Hora Los Angeles: " + losAngeles);
+	console.log("Hora Los Angeles Bonito: " + losAngelesF);
+	console.log("Hora Los Angeles Bonito Final: " + losAngelesFF);
 	var transporter = nodemailer.createTransport({
 	  service: 'gmail',
 	  auth: {
@@ -37,7 +45,7 @@ server.post('correo', (req, res, next) =>
 	  from: 'kabska1999@gmail.com',
 	  to: data.destinatario,
 	  subject: data.asunto,
-	  text: data.texto + ' ' + tiempoF + ' ' + momenttz.tz.guess()
+	  text: data.texto + ' ' + losAngelesFF + ' ' + momenttz.tz(losAngeles, 'America/Los_Angeles').format('z')
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
